@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DepartamentRepository extends JpaRepository<Departament, Long>{
-    
+
 }
