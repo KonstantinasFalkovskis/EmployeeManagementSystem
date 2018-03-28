@@ -9,10 +9,18 @@ import org.springframework.stereotype.Service;
 public interface EmployeeService {
 
     //find exist emloyees by name with pagination
-    Page<Employee> findByName(String name, Pageable pageable);
+    public Page<Employee> findByName(String name, Pageable pageable);
 
-    //find exist employees list with pagination
-    Page<Employee> findAll(Pageable pageable);
+    //get exist employees list with pagination
+    public Page<Employee> findAll(Pageable pageable);
 
+    //get employee by id
+    public Employee getEmployeeById(Long id);
+
+    //delete employee by id
+    public void deleteEmployee(Long id);
+
+    //save employee
+    public Employee saveEmployee(Employee employee);
 
 }
