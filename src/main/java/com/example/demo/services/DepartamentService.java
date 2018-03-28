@@ -1,3 +1,8 @@
+/**
+ * @Author - Falco Constantine
+ * @date - 2018.03.28
+ * @version - v.1.0
+ */
 package com.example.demo.services;
 
 import com.example.demo.entities.Departament;
@@ -5,6 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+/**
+ * Department services defining into abstract class
+ */
 @Service
 public interface DepartamentService {
 
