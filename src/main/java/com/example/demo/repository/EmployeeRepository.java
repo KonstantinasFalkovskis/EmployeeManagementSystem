@@ -1,3 +1,8 @@
+/**
+ * @Author - Falco Constantine
+ * @date - 2018.03.28
+ * @version - v.1.0
+ */
 package com.example.demo.repository;
 
 import com.example.demo.entities.Employee;
@@ -9,6 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+    //employee searching by name value
     Page<Employee> findByName(String name, Pageable pageable);
 
 }
