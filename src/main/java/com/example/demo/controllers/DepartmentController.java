@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -44,9 +45,13 @@ public class DepartmentController {
     @GetMapping("/departments/add")
     public String newDepo(Model model) {
         model.addAttribute("department", new Departament());
-        return "views/departments";
+        return "views/depoForm";
     }
 
-    
+    @GetMapping("/departments/edit/{id}")
+    public String updateDepo(@PathVariable Long id, Model model) {
+        model.addAttribute("department", departamentService.findOne(id));
+        return "views/depoForm";
+    }
 
 }
