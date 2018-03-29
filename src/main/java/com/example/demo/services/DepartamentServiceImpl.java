@@ -10,21 +10,26 @@ import com.example.demo.repository.DepartamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 /**
  * Methods implementations for Department entity
  */
+@Service
 public class DepartamentServiceImpl implements DepartamentService {
 
     //Department repository reaching
     @Autowired
     private DepartamentRepository departamentRepository;
 
-    //department from data base by name. Pagination included also;
-    @Override
-    public Page<Departament> findDepoByName(String name, Pageable pageable) {
-        return departamentRepository.findDepoByName(name, pageable);
-    }
+    //Department service calling
+    @Autowired
+    private DepartamentService departamentService;
+
+    //department from data base by depo name. Pagination included also;
+    public Page<Departament> findDepoByName(String departament, Pageable pageable) {
+        return departamentService.findDepoByName("%" + departament + "%", pageable);
+        }
 
     //departments list from data base + pagination;
     @Override
@@ -48,5 +53,10 @@ public class DepartamentServiceImpl implements DepartamentService {
     @Override
     public void deleteDepo(Long id) {
         departamentRepository.deleteById(id);
+    }
+    //get list of departments
+    @Override
+    public Iterable<Departament> findListDepartment() {
+        return departamentRepository.findAll();
     }
 }
