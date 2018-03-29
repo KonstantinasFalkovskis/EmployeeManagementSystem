@@ -42,16 +42,22 @@ public class DepartmentController {
         }
     }
 
-    @GetMapping("/departments/add")
+    @GetMapping("/add")
     public String newDepo(Model model) {
         model.addAttribute("department", new Departament());
         return "views/depoForm";
     }
 
-    @GetMapping("/departments/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String updateDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
         return "views/depoForm";
+    }
+
+    @GetMapping("/view/{id}")
+    public String showDepo(@PathVariable Long id, Model model) {
+        model.addAttribute("department", departamentService.findOne(id));
+        return "views/showForm";
     }
 
 }
