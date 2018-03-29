@@ -80,4 +80,10 @@ public class ElmployeeController {
         return "redirect:/employees";
     }
 
+    @PostMapping("employees/save")
+    public String saveEmployee(Employee employee) {
+        employeeService.saveEmployee(employee);
+        return  "redirect:/employees";
+    }
+
 }
