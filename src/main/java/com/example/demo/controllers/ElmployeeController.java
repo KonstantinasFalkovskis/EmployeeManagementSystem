@@ -74,6 +74,10 @@ public class ElmployeeController {
         return "views/employeeShowForm";
     }
 
-
+    @RequestMapping("employees/delete/{id}")
+    public String removeEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/employees";
+    }
 
 }
