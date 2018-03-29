@@ -22,31 +22,51 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    //Employee finding from data base by name value, also with pagination possibility;
+    /**
+     * Employee finding from data base by name value, also with pagination possibility;
+     * @param name
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<Employee> findByName(String name, Pageable pageable) {
         return employeeRepository.findByName("%" + name + "%", pageable);
     }
 
-    //list of employee calling + pagination;
+    /**
+     * list of employee calling + pagination;
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<Employee> findAll(Pageable pageable) {
         return employeeRepository.findAll(pageable);
     }
 
-    //calling employee by id value
+    /**
+     * calling employee by id value
+     * @param id
+     * @return
+     */
     @Override
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id).orElse(null);
     }
 
-    //employee removing from data base by id value
+    /**
+     * employee removing from data base by id value
+     * @param id
+     */
     @Override
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
 
-    //employee adding into data base
+    /**
+     * employee adding into data base
+     * @param employee
+     * @return
+     */
     @Override
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
