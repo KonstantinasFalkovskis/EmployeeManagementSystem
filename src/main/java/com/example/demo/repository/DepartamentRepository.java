@@ -14,8 +14,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DepartamentRepository extends JpaRepository<Departament, Long> {
 
-    //get department by searching name
-//   Page<Departament> findDepoByName(String departament, Pageable pageable);
-//    Page<Departament> findAll(Pageable pageable);
-
 }
