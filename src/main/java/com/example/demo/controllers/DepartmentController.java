@@ -43,30 +43,33 @@ public class DepartmentController {
         }
     }
 
-    @GetMapping("/add")
+    @GetMapping("departments/add")
     public String newDepo(Model model) {
         model.addAttribute("department", new Departament());
         return "views/depoForm";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("departments/edit/{id}")
     public String updateDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
         return "views/depoForm";
     }
 
-    @GetMapping("/view/{id}")
+    @GetMapping("departments/view/{id}")
     public String showDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
         return "views/showForm";
     }
 
-    @PostMapping("/save")
+    @PostMapping("departments/save")
     public String saveDepo(Model model, Departament departament) {
         model.addAttribute("department", departamentService.saveDepo(departament));
         return "views/departments";
     }
 
-    
-
+    @GetMapping("departments/delete/{id}")
+    public String removeDepo(@PathVariable Long id) {
+        departamentService.deleteDepo(id);
+        return "views/departments";
+    }
 }
