@@ -44,6 +44,7 @@ public class Departament {
         this.departament = departament;
         this.employee = employee;
     }
+
     //getters and setters
     public Long getId() {
         return id;
