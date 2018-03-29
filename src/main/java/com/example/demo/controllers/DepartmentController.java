@@ -1,3 +1,8 @@
+/**
+ * @Author - Falco Constantine
+ * @date - 2018.03.29
+ * @version - v.1.0
+ */
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Departament;
@@ -14,15 +19,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Department controller
+ */
 @Controller
 public class DepartmentController {
 
+    //department service class calling
     @Autowired
     private DepartamentService departamentService;
 
-    @Autowired
-    private DepartamentRepository departamentRepository;
-
+    /**
+     * searching and paging
+     * @param pageable
+     * @param department
+     * @param model
+     * @return
+     */
     @GetMapping("/departments")
     public String list(@PageableDefault(size = 7) Pageable pageable,
                        @RequestParam(defaultValue = "") String department, Model model) {
@@ -43,30 +56,58 @@ public class DepartmentController {
         }
     }
 
+    /**
+     * Adding new department
+     * @param model
+     * @return
+     */
     @GetMapping("departments/add")
     public String newDepo(Model model) {
         model.addAttribute("department", new Departament());
         return "views/depoForm";
     }
 
+    /**
+     * Updating department
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("departments/edit/{id}")
     public String updateDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
         return "views/depoForm";
     }
 
+    /**
+     * Viewing department
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("departments/view/{id}")
     public String showDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
         return "views/showForm";
     }
 
+    /**
+     * Saving new department into the data base
+     * @param model
+     * @param departament
+     * @return
+     */
     @PostMapping("departments/save")
     public String saveDepo(Model model, Departament departament) {
         model.addAttribute("department", departamentService.saveDepo(departament));
         return "views/departments";
     }
 
+    /**
+     * Removing department
+     * @param id
+     * @return
+     */
     @GetMapping("departments/delete/{id}")
     public String removeDepo(@PathVariable Long id) {
         departamentService.deleteDepo(id);
