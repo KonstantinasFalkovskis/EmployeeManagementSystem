@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -59,5 +60,13 @@ public class DepartmentController {
         model.addAttribute("department", departamentService.findOne(id));
         return "views/showForm";
     }
+
+    @PostMapping("/save")
+    public String saveDepo(Model model, Departament departament) {
+        model.addAttribute("department", departamentService.saveDepo(departament));
+        return "views/departments";
+    }
+
+    
 
 }
