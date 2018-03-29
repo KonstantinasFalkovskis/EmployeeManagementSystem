@@ -12,9 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DepartamentRepository extends JpaRepository<Departament, Long>{
+public interface DepartamentRepository extends JpaRepository<Departament, Long> {
 
     //get department by searching name
-    public Page<Departament> findDepoByName(String name, Pageable pageable);
+//   Page<Departament> findDepoByName(String departament, Pageable pageable);
+//    Page<Departament> findAll(Pageable pageable);
 
 }
