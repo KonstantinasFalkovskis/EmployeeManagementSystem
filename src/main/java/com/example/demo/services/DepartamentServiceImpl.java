@@ -22,39 +22,63 @@ public class DepartamentServiceImpl implements DepartamentService {
     @Autowired
     private DepartamentRepository departamentRepository;
 
-    //Department service calling
+    //Department services calling
     @Autowired
     private DepartamentService departamentService;
 
-    //department from data base by depo name. Pagination included also;
+    /**
+     * department from data base by depo name. Pagination included also;
+     * @param departament
+     * @param pageable
+     * @return
+     */
     public Page<Departament> findDepoByName(String departament, Pageable pageable) {
         return departamentService.findDepoByName("%" + departament + "%", pageable);
         }
 
-    //departments list from data base + pagination;
+    /**
+     * departments list from data base + pagination;
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<Departament> findAll(Pageable pageable) {
         return departamentRepository.findAll(pageable);
     }
 
-    //department calling from list by id
+    /**
+     * department calling from list by id
+     * @param id
+     * @return
+     */
     @Override
     public Departament findOne(Long id) {
         return departamentRepository.findById(id).orElse(null);
     }
 
-    //department adding to data base
+    /**
+     * department saving method which saves depo into the data base
+     * @param departament
+     * @return
+     */
     @Override
     public Departament saveDepo(Departament departament) {
         return departamentRepository.save(departament);
     }
 
-    //department removing from data base by id value
+    /**
+     * department removing from data base by id value
+     * @param id
+     */
     @Override
     public void deleteDepo(Long id) {
         departamentRepository.deleteById(id);
     }
-    //get list of departments
+
+    /**
+     * get list of departments which used in EmployeeController
+     * @return
+     */
     @Override
     public Iterable<Departament> findListDepartment() {
         return departamentRepository.findAll();
