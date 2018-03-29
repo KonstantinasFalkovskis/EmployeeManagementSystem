@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Departament;
+import com.example.demo.repository.DepartamentRepository;
 import com.example.demo.services.DepartamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,9 @@ public class DepartmentController {
 
     @Autowired
     private DepartamentService departamentService;
+
+    @Autowired
+    private DepartamentRepository departamentRepository;
 
     @GetMapping("/departments")
     public String list(@PageableDefault(size = 7) Pageable pageable,
@@ -36,4 +40,13 @@ public class DepartmentController {
             return "views/departments";
         }
     }
+
+    @GetMapping("/departments/add")
+    public String newDepo(Model model) {
+        model.addAttribute("department", new Departament());
+        return "views/departments";
+    }
+
+    
+
 }
