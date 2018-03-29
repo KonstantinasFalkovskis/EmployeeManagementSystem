@@ -23,14 +23,22 @@ import org.springframework.data.domain.Pageable;
 @Controller
 public class ElmployeeController {
 
+    //get services for employee
     @Autowired
     private EmployeeService employeeService;
 
+    //get services for department, which here is as list of departments
     @Autowired
     private DepartamentService departamentService;
 
-    //calling searching form by name;
-    //default rows per page 7
+    /**
+     * Searching & paging: calling searching form by name;
+     * default rows per page 7
+     * @param pageable
+     * @param name
+     * @param model
+     * @return
+     */
     @GetMapping("/empoyees")
     public String list(@PageableDefault(size = 7) Pageable pageable,
                                @RequestParam(defaultValue = "") String name, Model model) {
@@ -51,7 +59,11 @@ public class ElmployeeController {
         }
     }
 
-    //calling to adding new employee
+    /**
+     * calling to adding new employee
+     * @param model
+     * @return
+     */
     @RequestMapping("employees/add")
     public String addEmployee(Model model) {
         model.addAttribute("employee", new Employee());
@@ -59,7 +71,12 @@ public class ElmployeeController {
         return "views/employeeForm";
     }
 
-    //calling editing 
+    /**
+     * Updating calling
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("employees/edit/{id}")
     public String updateEmploye(@PathVariable Long id, Model model) {
         model.addAttribute("employee", employeeService.getEmployeeById(id));
@@ -67,6 +84,12 @@ public class ElmployeeController {
         return "views/employeeForm";
     }
 
+    /**
+     * Employee viewing
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("employees/view/{id}")
     public String showEmployee(@PathVariable Long id, Model model) {
            model.addAttribute("employee", employeeService.getEmployeeById(id));
@@ -74,12 +97,22 @@ public class ElmployeeController {
         return "views/employeeShowForm";
     }
 
+    /**
+     * Employee removing
+     * @param id
+     * @return
+     */
     @RequestMapping("employees/delete/{id}")
     public String removeEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
         return "redirect:/employees";
     }
 
+    /**
+     * Employee saving into the data base
+     * @param employee
+     * @return
+     */
     @PostMapping("employees/save")
     public String saveEmployee(Employee employee) {
         employeeService.saveEmployee(employee);
