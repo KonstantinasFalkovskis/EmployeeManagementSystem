@@ -13,23 +13,24 @@ import org.springframework.stereotype.Service;
 /**
  * Department services defining into abstract class
  */
-@Service
 public interface DepartamentService {
 
     //get department by name
-    public Page<Departament> findDepoByName(String name, Pageable pageable);
+    Page<Departament> findDepoByName(String departament, Pageable pageable);
 
     //get exist deprtaments list
-    public Page<Departament> findAll(Pageable pageable);
+    Page<Departament> findAll(Pageable pageable);
+
+    Iterable<Departament> findListDepartment();
 
     //get department info by id
-    public Departament findOne(Long id);
+    Departament findOne(Long id);
 
     //save department into DB
-    public Departament saveDepo(Departament departament);
+    Departament saveDepo(Departament departament);
 
     //remove department from data base
-    public void deleteDepo(Long id);
+    void deleteDepo(Long id);
 
 
 }
