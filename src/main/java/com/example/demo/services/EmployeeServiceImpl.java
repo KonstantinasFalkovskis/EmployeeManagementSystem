@@ -10,10 +10,12 @@ import com.example.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 /**
  * Methods for Employee entity from EmployeeService implementation
  */
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     //Employee repo calling. There are default save, delete, find etc. methods
@@ -23,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     //Employee finding from data base by name value, also with pagination possibility;
     @Override
     public Page<Employee> findByName(String name, Pageable pageable) {
-        return employeeRepository.findByName(name, pageable);
+        return employeeRepository.findByName("%" + name + "%", pageable);
     }
 
     //list of employee calling + pagination;
