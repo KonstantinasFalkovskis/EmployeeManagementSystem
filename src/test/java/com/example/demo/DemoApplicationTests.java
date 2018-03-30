@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,17 +21,17 @@ public class DemoApplicationTests {
 
 	@Test
 	public void addDepartment() {
-		Departament departament = new Departament(1L, "Accounting");
-		assertNotNull(departament);
+		Departament departament = new Departament(8L, "Accounting");
+		//assertNotNull(departament);
 		departamentService.saveDepo(departament);
 		assertEquals(departament.getDepartament(), "Accounting");
 	}
 
 	@Test
 	public void editDepo() {
-		Departament depo = departamentService.findOne(1L);
+		Departament depo = departamentService.findOne(5L);
 		assertNotNull(depo);
-		Departament updatedDepo = new Departament(1L, "Management");
+		Departament updatedDepo = new Departament(5L, "Management");
 		assertNotNull(updatedDepo);
 		departamentService.saveDepo(updatedDepo);
 		assertEquals(updatedDepo.getDepartament(), "Management");
@@ -38,8 +39,16 @@ public class DemoApplicationTests {
 
 	@Test
 	public void viewDepo() {
-		Departament depo = departamentService.findOne(1L);
+		Departament depo = departamentService.findOne(5L);
 		assertNotNull(depo);
 		assertEquals(depo.getDepartament(), "Management");
+	}
+
+	@Test
+	public void deleteDepo() {
+		Iterable<Departament> departament = departamentService.findListDepartment();
+		if (departament != null) {
+			departamentService.deleteDepo(7L);
+		}
 	}
 }
