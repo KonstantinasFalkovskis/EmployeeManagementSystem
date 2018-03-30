@@ -29,7 +29,7 @@ public class DemoApplicationTests {
 
 	@Test
 	public void addDepartment() {
-		Departament departament = new Departament(8L, "Accounting");
+		Departament departament = new Departament(10L, "Accounting");
 		departamentService.saveDepo(departament);
         assertNotNull(departament);
 		assertEquals(departament.getDepartament(), "Accounting");
@@ -54,17 +54,51 @@ public class DemoApplicationTests {
 
 	@Test
 	public void deleteDepo() {
-		Iterable<Departament> departament = departamentService.findListDepartment();
-		if (departament != null) {
-			departamentService.deleteDepo(7L);
+		Departament departament = departamentService.findOne(9L);
+		if (departament.getId() != null) {
+			departamentService.deleteDepo(9L);
+			employeeService.deleteEmployee(departament.getId());
 		}
 	}
 
 	@Test
     public void addNewEmployee() {
         Employee employee = new Employee("John McLain", "3500", "john@yahoo.com", null);
+        Employee employee2 = new Employee("Alex Fox", "4500", "alex@yahoo.com", null);
         employeeService.saveEmployee(employee);
+        employeeService.saveEmployee(employee2);
         assertNotNull(employee);
         assertEquals(employee.getName(), "John McLain");
+        assertNotNull(employee2);
+        assertEquals(employee2.getName(), "Alex Fox");
     }
+
+    @Test
+    public void showEmployee() {
+        Employee employee = employeeService.getEmployeeById(3L);
+        assertNotNull(employee);
+        assertEquals(employee.getName(), "Alex Fox");
+    }
+
+    @Test
+    public void editEmploye() {
+        Employee employee = employeeService.getEmployeeById(3L);
+        assertNotNull(employee);
+        assertEquals(employee.getName(), "Alex Fox");
+        employee = new Employee(3L, "Test Test", "5000", "test@gmail.com");
+	    employeeService.saveEmployee(employee);
+        assertNotNull(employee);
+        assertEquals(employee.getName(), "Test Test");
+    }
+
+    @Test
+    public void delEmployeeByName() {
+	    Employee employee = employeeService.getEmployeeById(3L);
+        assertNotNull(employee);
+        assertEquals(employee.getName(), "Test Test");
+        employeeService.deleteEmployee(3L);
+        assertNull(employee);
+        assertEquals(employee.getName(), "");
+    }
+
 }
