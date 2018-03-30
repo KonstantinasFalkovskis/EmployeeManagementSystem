@@ -8,6 +8,8 @@ package com.example.demo.controllers;
 import com.example.demo.entities.Employee;
 import com.example.demo.services.DepartamentService;
 import com.example.demo.services.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,9 @@ import org.springframework.data.domain.Pageable;
  */
 @Controller
 public class ElmployeeController {
+
+    //Logger for functionality checking. Logs info goes to console;
+    private static final Logger logger = LoggerFactory.getLogger(ElmployeeController.class);
 
     //get services for employee
     @Autowired
@@ -48,6 +53,7 @@ public class ElmployeeController {
             Page<Employee> employeePage = employeeService.findByName(name, pageable);
             PageWrapper page = new PageWrapper(employeePage, "/employees");
             model.addAttribute("employees", page.getContent());
+            logger.info("Employee " + name + " founded");
             model.addAttribute("page", page);
             return "views/employees";
         } else {
@@ -68,6 +74,7 @@ public class ElmployeeController {
     public String addEmployee(Model model) {
         model.addAttribute("employee", new Employee());
         model.addAttribute("departmens", departamentService.findListDepartment());
+        logger.info("Employee added" + model);
         return "views/employeeForm";
     }
 
@@ -81,6 +88,7 @@ public class ElmployeeController {
     public String updateEmploye(@PathVariable Long id, Model model) {
         model.addAttribute("employee", employeeService.getEmployeeById(id));
         model.addAttribute("departments", departamentService.findListDepartment());
+        logger.info("Employee " + id + "updated" + model);
         return "views/employeeForm";
     }
 
@@ -94,6 +102,7 @@ public class ElmployeeController {
     public String showEmployee(@PathVariable Long id, Model model) {
            model.addAttribute("employee", employeeService.getEmployeeById(id));
            model.addAttribute("departments", departamentService.findListDepartment());
+        logger.info("Employee " + id + " opened");
         return "views/employeeShowForm";
     }
 
@@ -105,6 +114,7 @@ public class ElmployeeController {
     @RequestMapping("employees/delete/{id}")
     public String removeEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
+        logger.info("Eployee " + id + " removed");
         return "redirect:/employees";
     }
 
@@ -116,6 +126,7 @@ public class ElmployeeController {
     @PostMapping("employees/save")
     public String saveEmployee(Employee employee) {
         employeeService.saveEmployee(employee);
+        logger.info("Employee " + employee + " saved successfully into data base");
         return  "redirect:/employees";
     }
 
