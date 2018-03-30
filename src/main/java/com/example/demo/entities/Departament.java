@@ -45,6 +45,12 @@ public class Departament {
         this.employee = employee;
     }
 
+    //department constructor for testing
+    public Departament(Long id, String departament) {
+        this.id = id;
+        this.departament = departament;
+    }
+
     //getters and setters
     public Long getId() {
         return id;
