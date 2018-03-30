@@ -51,7 +51,7 @@ public class Employee {
     //value departmentId
     //relations between columns: reference ManyToOne
     //columns departament_id & id from different tables joining
-    @NotEmpty
+    //@NotEmpty
     @ManyToOne(optional = false)
     @JoinColumn(name = "departament_id", referencedColumnName = "id")
     private Departament departamentId;
@@ -64,7 +64,7 @@ public class Employee {
     public Employee(@NotEmpty @Size(min = 1, max = 50) String name,
                     @NotEmpty @Size(min = 3, max = 20) String salary,
                     @NotEmpty @Email @Size(min = 1, max = 50) String email,
-                    @NotEmpty Departament departamentId) {
+                    Departament departamentId) {
         this.name = name;
         this.salary = salary;
         this.email = email;
