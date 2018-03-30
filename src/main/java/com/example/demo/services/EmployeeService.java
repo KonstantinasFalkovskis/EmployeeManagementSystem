@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Employees services
  */
@@ -30,5 +32,8 @@ public interface EmployeeService {
 
     //save employee
     Employee saveEmployee(Employee employee);
+
+    //list of employee
+    List<Employee> employeeList();
 
 }
