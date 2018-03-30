@@ -31,6 +31,15 @@ public class DemoApplicationTests {
 		Departament depo = departamentService.findOne(1L);
 		assertNotNull(depo);
 		Departament updatedDepo = new Departament(1L, "Management");
+		assertNotNull(updatedDepo);
+		departamentService.saveDepo(updatedDepo);
+		assertEquals(updatedDepo.getDepartament(), "Management");
 	}
 
+	@Test
+	public void viewDepo() {
+		Departament depo = departamentService.findOne(1L);
+		assertNotNull(depo);
+		assertEquals(depo.getDepartament(), "Management");
+	}
 }
