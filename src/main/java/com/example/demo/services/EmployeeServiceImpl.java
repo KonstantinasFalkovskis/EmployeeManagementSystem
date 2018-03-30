@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * Methods for Employee entity from EmployeeService implementation
  */
@@ -58,6 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param id
      */
     @Override
+    @Transactional
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
@@ -68,6 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return
      */
     @Override
+    @Transactional
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
