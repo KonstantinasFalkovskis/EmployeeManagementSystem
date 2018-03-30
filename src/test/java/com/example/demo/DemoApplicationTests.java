@@ -1,12 +1,17 @@
 package com.example.demo;
 
 import com.example.demo.entities.Departament;
+import com.example.demo.entities.Employee;
 import com.example.demo.services.DepartamentService;
+import com.example.demo.services.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -19,11 +24,14 @@ public class DemoApplicationTests {
 	@Autowired
 	private DepartamentService departamentService;
 
+	@Autowired
+    private EmployeeService employeeService;
+
 	@Test
 	public void addDepartment() {
 		Departament departament = new Departament(8L, "Accounting");
-		//assertNotNull(departament);
 		departamentService.saveDepo(departament);
+        assertNotNull(departament);
 		assertEquals(departament.getDepartament(), "Accounting");
 	}
 
@@ -51,4 +59,12 @@ public class DemoApplicationTests {
 			departamentService.deleteDepo(7L);
 		}
 	}
+
+	@Test
+    public void addNewEmployee() {
+        Employee employee = new Employee("John McLain", "3500", "john@yahoo.com", null);
+        employeeService.saveEmployee(employee);
+        assertNotNull(employee);
+        assertEquals(employee.getName(), "John McLain");
+    }
 }
