@@ -70,6 +70,14 @@ public class Employee {
         this.email = email;
         this.departamentId = departamentId;
     }
+    //employee constructor for testing
+    public Employee(Long id, String name, String salary, String email) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.email = email;
+    }
+
     //getters & setters for values
     public Long getId() {
         return id;
