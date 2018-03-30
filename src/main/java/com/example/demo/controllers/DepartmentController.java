@@ -8,6 +8,8 @@ package com.example.demo.controllers;
 import com.example.demo.entities.Departament;
 import com.example.demo.repository.DepartamentRepository;
 import com.example.demo.services.DepartamentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class DepartmentController {
+
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentController.class);
 
     //department service class calling
     @Autowired
@@ -46,6 +50,7 @@ public class DepartmentController {
             PageWrapper page = new PageWrapper(depoPage, "/departments");
             model.addAttribute("departments", page.getContent());
             model.addAttribute("page", page);
+            logger.info("Department " + department + " founded");
             return "views/departments";
         } else {
             Page<Departament> depoPage = departamentService.findAll(pageable);
@@ -64,6 +69,7 @@ public class DepartmentController {
     @GetMapping("departments/add")
     public String newDepo(Model model) {
         model.addAttribute("department", new Departament());
+        logger.info("Department " + model + "added");
         return "views/depoForm";
     }
 
@@ -76,6 +82,7 @@ public class DepartmentController {
     @GetMapping("departments/edit/{id}")
     public String updateDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
+        logger.info("Department " + id + model + " successfully edited");
         return "views/depoForm";
     }
 
@@ -88,6 +95,7 @@ public class DepartmentController {
     @GetMapping("departments/view/{id}")
     public String showDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
+        logger.info("Department " + id + model + " viewed successfully");
         return "views/showForm";
     }
 
@@ -100,6 +108,7 @@ public class DepartmentController {
     @PostMapping("departments/save")
     public String saveDepo(Model model, Departament departament) {
         model.addAttribute("department", departamentService.saveDepo(departament));
+        logger.info("Department " + departament + " saved successfully");
         return "views/departments";
     }
 
@@ -111,6 +120,7 @@ public class DepartmentController {
     @GetMapping("departments/delete/{id}")
     public String removeDepo(@PathVariable Long id) {
         departamentService.deleteDepo(id);
+        logger.info("Department " + id + " removed successfully");
         return "views/departments";
     }
 }
