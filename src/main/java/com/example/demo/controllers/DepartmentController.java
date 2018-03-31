@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Department controller
  */
@@ -57,6 +59,10 @@ public class DepartmentController {
             PageWrapper page = new PageWrapper(depoPage, "/departments");
             model.addAttribute("departments", page.getContent());
             model.addAttribute("page", page);
+            Iterable<Departament> depoList = departamentService.findListDepartment();
+            for(Departament departament: depoList){
+                logger.info("Department " + departament + " goes to the list successfully");
+            }
             return "views/departments";
         }
     }
@@ -69,7 +75,7 @@ public class DepartmentController {
     @GetMapping("departments/add")
     public String newDepo(Model model) {
         model.addAttribute("department", new Departament());
-        logger.info("Department " + model + "added");
+        logger.info("Department " + model + "added successfully");
         return "views/depoForm";
     }
 
@@ -119,7 +125,9 @@ public class DepartmentController {
      */
     @GetMapping("departments/delete/{id}")
     public String removeDepo(@PathVariable Long id) {
-        departamentService.deleteDepo(id);
+        if(departamentService.findOne(id)!= null){
+            departamentService.deleteDepo(id);
+        }
         logger.info("Department " + id + " removed successfully");
         return "views/departments";
     }
