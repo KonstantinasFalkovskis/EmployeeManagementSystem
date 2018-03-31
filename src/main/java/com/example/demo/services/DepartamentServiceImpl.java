@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * Methods implementations for Department entity
  */
@@ -62,6 +64,7 @@ public class DepartamentServiceImpl implements DepartamentService {
      * @return
      */
     @Override
+    @Transactional
     public Departament saveDepo(Departament departament) {
         return departamentRepository.save(departament);
     }
@@ -71,6 +74,7 @@ public class DepartamentServiceImpl implements DepartamentService {
      * @param id
      */
     @Override
+    @Transactional
     public void deleteDepo(Long id) {
         departamentRepository.deleteById(id);
     }

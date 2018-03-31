@@ -61,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param id
      */
     @Override
-//    @Transactional
+    @Transactional
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
@@ -72,7 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return
      */
     @Override
-//    @Transactional
+    @Transactional
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
