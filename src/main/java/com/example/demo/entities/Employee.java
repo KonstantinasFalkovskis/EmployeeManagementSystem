@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 
@@ -17,6 +18,11 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "employee")
+@XmlRootElement
+@NamedQueries({@NamedQuery(name = "Employee.findAll", query = "SELECT a FROM Employee a")
+        , @NamedQuery(name = "Employee.findBySalary", query = "SELECT a FROM Employee a WHERE a.salary = :salary")
+        , @NamedQuery(name = "Employee.findByName", query = "SELECT a FROM Employee a WHERE a.name = :name")
+        , @NamedQuery(name = "Employee.findById", query = "SELECT a FROM Employee a WHERE a.id = :id")})
 public class Employee {
 
     //autoincrement value id
