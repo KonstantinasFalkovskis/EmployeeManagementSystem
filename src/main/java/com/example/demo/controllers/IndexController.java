@@ -14,8 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController {
 
-    @RequestMapping(name = "/", method = RequestMethod.GET)
+    @GetMapping(name = "/")
     public String showPage() {
         return "index";
     }
+
+    @GetMapping("/login")
+    public String showLogin() {
+        return "views/loginForm";
+    }
+
 }
