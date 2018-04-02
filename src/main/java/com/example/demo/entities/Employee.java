@@ -17,12 +17,6 @@ import java.io.Serializable;
  * Employee entity
  */
 @Entity
-@Table(name = "employee")
-@XmlRootElement
-@NamedQueries({@NamedQuery(name = "Employee.findAll", query = "SELECT a FROM Employee a")
-        , @NamedQuery(name = "Employee.findBySalary", query = "SELECT a FROM Employee a WHERE a.salary = :salary")
-        , @NamedQuery(name = "Employee.findByName", query = "SELECT a FROM Employee a WHERE a.name = :name")
-        , @NamedQuery(name = "Employee.findById", query = "SELECT a FROM Employee a WHERE a.id = :id")})
 public class Employee {
 
     //autoincrement value id
