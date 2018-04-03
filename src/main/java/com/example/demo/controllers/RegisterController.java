@@ -1,3 +1,8 @@
+/**
+ * @Author - Falco Constantine
+ * @date - 2018.04.03
+ * @version - v.1.0
+ */
 package com.example.demo.controllers;
 
 import com.example.demo.entities.User;
@@ -8,12 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 
+/**
+ * Controller for new users registration into database
+ */
 @Controller
 public class RegisterController {
 
+    //calling user services
     @Autowired
     private UserServiceImpl userServiceImpl;
 
