@@ -1,3 +1,8 @@
+/**
+ * @Author - Falco Constantine
+ * @date - 2018.04.02
+ * @version - v.1.0
+ */
 package com.example.demo.repository;
 
 import com.example.demo.entities.User;
@@ -8,8 +13,17 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Users repository
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
+    /**
+     * searching by name + pagination
+     * @param name
+     * @param pageable
+     * @return
+     */
     Page<User> findByName(String name, Pageable pageable);
 }
