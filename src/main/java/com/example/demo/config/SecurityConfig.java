@@ -1,3 +1,8 @@
+/**
+ * @Author - Falco Constantine
+ * @date - 2018.04.02
+ * @version - v.1.0
+ */
 package com.example.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+/**
+ * Spring security configuration
+ */
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
