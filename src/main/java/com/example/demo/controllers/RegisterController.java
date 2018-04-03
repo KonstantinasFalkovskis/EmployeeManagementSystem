@@ -25,12 +25,23 @@ public class RegisterController {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
+    /**
+     * @param model
+     * @return
+     */
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
         return "views/registerForm";
     }
 
+    /**
+     * new user registering into database
+     * @param bindingResult
+     * @param user
+     * @param model
+     * @return
+     */
     @PostMapping("/register")
     public String registerUser(BindingResult bindingResult, @Valid User user, Model model) {
         if(bindingResult.hasErrors()) {
