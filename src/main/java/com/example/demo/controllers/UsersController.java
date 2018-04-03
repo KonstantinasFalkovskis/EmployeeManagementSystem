@@ -1,6 +1,10 @@
+/**
+ * @Author - Falco Constantine
+ * @date - 2018.04.03
+ * @version - v.1.0
+ */
 package com.example.demo.controllers;
 
-import com.example.demo.entities.Employee;
 import com.example.demo.entities.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.services.UserService;
@@ -17,17 +21,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Users controller
+ */
 @Controller
 public class UsersController {
 
+    //logger to input info toto console
     private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
+    //users services calling
     @Autowired
     private UserService userService;
 
+    //users repository calling
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * users searching by name or users list calling if name is blank
+     * @param model
+     * @param name
+     * @param pageable
+     * @return
+     */
     @GetMapping("/list")
     public String userList(Model model, @RequestParam(defaultValue = "") String name,
                            @PageableDefault(size = 10)Pageable pageable) {
@@ -49,6 +66,12 @@ public class UsersController {
         }
     }
 
+    /**
+     * Existing user editing
+     * @param email
+     * @param model
+     * @return
+     */
     @GetMapping("/list/edit/{id}")
     public String updateUser(@PathVariable String email, Model model) {
          model.addAttribute("users", userService.findOne(email));
@@ -56,6 +79,11 @@ public class UsersController {
          return "views/usersForm";
     }
 
+    /**
+     * Exist user removing
+     * @param email
+     * @return
+     */
     @GetMapping("/list/delete/{id}")
     public String removeUser(@PathVariable String email) {
        userRepository.deleteById(email);
@@ -63,6 +91,11 @@ public class UsersController {
        return "redirect:list";
     }
 
+    /**
+     * added user saving into database
+     * @param user
+     * @return
+     */
     @PostMapping("/users/save")
     public String saveUser(User user) {
        userService.saveUser(user);
@@ -70,6 +103,12 @@ public class UsersController {
       return "redirect:list";
     }
 
+    /**
+     * exist user showing
+     * @param email
+     * @param model
+     * @return
+     */
     @GetMapping("/users/view/{id}")
     public String showUser(@PathVariable String email, Model model) {
         model.addAttribute("users", userService.findOne(email));
