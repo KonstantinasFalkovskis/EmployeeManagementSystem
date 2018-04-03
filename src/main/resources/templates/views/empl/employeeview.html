@@ -1,0 +1,141 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+    <!--<head lang="en">-->
+
+        <!--<title>Sistema de Control de ASP | Detalles de Agente</title>-->
+
+        <!--&lt;!&ndash;/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/&ndash;&gt;-->
+    <!--</head>-->
+    <!--<body>-->
+        <!--<div class="container">-->
+            <!--&lt;!&ndash;/*/ <th:block th:include="fragments/header :: header"></th:block> /*/&ndash;&gt;-->
+
+            <!--<h2>Agente Details</h2>-->
+            <!--<div>-->
+                <!--<form class="form-horizontal">-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label">Agente Id:</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<p class="form-control-static" th:text="${agente.id}">Agente Id</p></div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label">Name:</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<p class="form-control-static" th:text="${agente.name}">Name</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label">Lastname:</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<p class="form-control-static" th:text="${agente.lastname}">Lastname</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label">CI:</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<p class="form-control-static" th:text="${agente.ci}">Price</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label">Key:</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<p class="form-control-static" th:text="${agente.centro_id}">Key</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml"
+      xmlns:spring="http://jboss.org/xml/ns/javax/validation/mapping">
+<head lang="en">
+
+    <title>Sistema de Control de ASP | Detalles de Agente</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+    <h2>Agente Details</h2>
+      <div>
+              <form class="form-horizontal" th:object="${agente}" >
+            <input type="hidden" th:field="*{id}"/>
+                  <!--<fieldset>-->
+                      <!--<label class="control-label" for="readOnlyInput">Name:</label>-->
+                      <!--<input class="form-control" id="readOnlyInput" type="text" placeholder="Readonly input here…" readonly="">-->
+                  <!--</fieldset>-->
+                  <div class="form-group">
+                      <fieldset>
+                <label class="col-sm-2 control-label" for="readOnlyInput">Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="readOnlyInput" required="true" class="form-control"
+                           th:field="*{name}" readonly=""/>
+                </div>
+                      </fieldset>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="readOnlyInput">Lastname:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="readOnlyInput" required="true" class="form-control" th:field="*{lastname}" readonly=""/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Salary:</label>
+                <div class="col-sm-10">
+                    <input type="text" required="true" class="form-control" th:field="*{ci}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Centro:</label>
+                <div class="col-sm-10">
+                    <select class="form-control" th:field="*{centroIdId}">
+                        <option th:each="centro : ${centros}"
+                                th:value="${{centro.id}}" th:text="${centro.name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" align="center">
+                <a th:href="@{/agentes}" class="btn btn-warning" title="Back to agents list">
+                    <i class="glyphicon glyphicon-arrow-left"> </i> Back
+                </a>
+                <!--<button type="submit" class="btn btn-success">Guardar</button>-->
+            </div>
+        </form>
+    </div>
+
+
+
+        <!--<form class="form-horizontal">-->
+
+        <!--<div class="form-group">-->
+        <!--<label class="col-sm-2 control-label">Name:</label>-->
+        <!--<div class="col-sm-10">-->
+        <!--<p class="form-control-static" th:text="${agente.name}">Name</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<label class="col-sm-2 control-label">Lastname:</label>-->
+        <!--<div class="col-sm-10">-->
+        <!--<p class="form-control-static" th:text="${agente.lastname}">Lastname</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<label class="col-sm-2 control-label">CI:</label>-->
+        <!--<div class="col-sm-10">-->
+        <!--<p class="form-control-static" th:text="${agente.ci}">Price</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</form>-->
+        <!--</div>-->
+
+
+</div>
+
+</body>
+</html>
