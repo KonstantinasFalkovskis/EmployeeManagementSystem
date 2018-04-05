@@ -5,6 +5,8 @@
  */
 package com.example.demo.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.sql.DataSource;
 
 /**
  * Spring security configuration
@@ -47,13 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/", "/about", "/login", "/css/**", "/webjars/**").permitAll()
-                .antMatchers("/profile", "/empl/employee", "/depo/departments", "/empl/employee/add",
-                        "/empl/employee/edit/{id}", "/empl/employee/view/{id}").hasAnyRole("USER,ADMIN")
-                .antMatchers("/register", "/users","/addTask").hasRole("ADMIN")
+        http.authorizeRequests().antMatchers("/", "/login", "/css/**", "/webjars/**").permitAll()
+                .antMatchers("/profile", "/employees", "/employee/view/{id}", "/about").hasAnyRole("USER,ADMIN")
+                .antMatchers("/register", "/users", "/addTask", "/employees/add").hasRole("ADMIN")
                 .and().formLogin().loginPage("/login").permitAll()
-//				.defaultSuccessUrl("/profile").and().logout().logoutSuccessUrl("/login");
+				//.defaultSuccessUrl("/profile").and().logout().logoutSuccessUrl("/login");
                 .defaultSuccessUrl("/profile").and().logout().logoutSuccessUrl("/");
+
     }
 
 
