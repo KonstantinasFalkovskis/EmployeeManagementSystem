@@ -53,7 +53,7 @@ public class DepartmentController {
             model.addAttribute("departments", page.getContent());
             model.addAttribute("page", page);
             logger.info("Department " + department + " founded");
-            return "views/departments";
+            return "department/departments";
         } else {
             Page<Departament> depoPage = departamentService.findAll(pageable);
             PageWrapper page = new PageWrapper(depoPage, "/departments");
@@ -63,7 +63,7 @@ public class DepartmentController {
             for(Departament departament: depoList){
                 logger.info("Department " + departament + " goes to the list successfully");
             }
-            return "views/departments";
+            return "department/departments";
         }
     }
 
@@ -72,11 +72,11 @@ public class DepartmentController {
      * @param model
      * @return
      */
-    @GetMapping("departments/add")
+    @GetMapping("department/add")
     public String newDepo(Model model) {
         model.addAttribute("department", new Departament());
         logger.info("Department " + model + "added successfully");
-        return "views/depoForm";
+        return "department/depoForm";
     }
 
     /**
@@ -85,11 +85,11 @@ public class DepartmentController {
      * @param model
      * @return
      */
-    @GetMapping("departments/edit/{id}")
+    @GetMapping("department/edit/{id}")
     public String updateDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
         logger.info("Department " + id + model + " successfully edited");
-        return "views/depoForm";
+        return "department/depoForm";
     }
 
     /**
@@ -98,7 +98,7 @@ public class DepartmentController {
      * @param model
      * @return
      */
-    @GetMapping("departments/view/{id}")
+    @GetMapping("department/view/{id}")
     public String showDepo(@PathVariable Long id, Model model) {
         model.addAttribute("department", departamentService.findOne(id));
         logger.info("Department " + id + model + " viewed successfully");
@@ -111,11 +111,11 @@ public class DepartmentController {
      * @param departament
      * @return
      */
-    @PostMapping("departments/save")
+    @PostMapping("department")
     public String saveDepo(Model model, Departament departament) {
         model.addAttribute("department", departamentService.saveDepo(departament));
         logger.info("Department " + departament + " saved successfully");
-        return "views/departments";
+        return "department/departments";
     }
 
     /**
@@ -123,12 +123,12 @@ public class DepartmentController {
      * @param id
      * @return
      */
-    @GetMapping("departments/delete/{id}")
+    @GetMapping("department/delete/{id}")
     public String removeDepo(@PathVariable Long id) {
         if(departamentService.findOne(id)!= null){
             departamentService.deleteDepo(id);
         }
         logger.info("Department " + id + " removed successfully");
-        return "views/departments";
+        return "@PostMapping/departments";
     }
 }
