@@ -23,4 +23,8 @@ public interface UserService {
     public User saveUser(User user);
 
     public List<User> listUsers();
+
+    List<User> findByName(String name);
+
+    Page<User> findByName(String name, Pageable pageable);
 }
