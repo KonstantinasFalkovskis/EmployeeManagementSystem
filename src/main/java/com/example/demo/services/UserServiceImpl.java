@@ -51,7 +51,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public Page<User> findByName(String name, Pageable pageable) {
-        return userRepository.findByName("%" + name + "%", pageable);
+        return userRepository.findByNameLike("%"+name+"%", pageable);
+    }
+
+    public List<User> findByName(String name) {
+        return userRepository.findByNameLike("%"+name+"%");
     }
 
     public boolean isUserPresent(String email) {
