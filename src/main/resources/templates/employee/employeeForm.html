@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head lang="en">
-
-        <title>Employee Management System | Create Employee</title>
-
-        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
     </head>
     <body>
         <div class="container">
-            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
             <h2>Employee Details</h2>
             <div>
-                <form class="form-horizontal" th:object="${agente}" th:action="@{/agente}" method="post">
+                <form class="form-horizontal" th:object="${employee}" th:action="@{/employee}" method="post">
                     <input type="hidden" th:field="*{id}"/>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Name</label>
@@ -35,16 +30,16 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Departament</label>
                         <div class="col-sm-10">
-                            <select class="form-control" th:field="*{centroIdId}">
-                                <option th:each="centro : ${centros}"
-                                        th:value="${{centro.id}}" th:text="${centro.name}">
+                            <select class="form-control" th:field="*{departmentId}">
+                                <option th:each="department : ${departments}"
+                                        th:value="${{department.id}}" th:text="${department.name}">
                                 </option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row" align="center">
-                        <a th:href="@{/agentes}" class="btn btn-warning" title="Back to agents list">
+                        <a th:href="@{/employees}" class="btn btn-warning" title="Back to agents list">
                             <i class="glyphicon glyphicon-arrow-left"> </i> Back
                         </a>
                         <button type="submit" class="btn btn-success"> <i class="glyphicon glyphicon-save"> </i>
