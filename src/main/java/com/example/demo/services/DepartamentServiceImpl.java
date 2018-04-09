@@ -6,6 +6,7 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Departament;
+import com.example.demo.entities.User;
 import com.example.demo.repository.DepartamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,16 +31,18 @@ public class DepartamentServiceImpl implements DepartamentService {
 
     /**
      * department from data base by depo name. Pagination included also;
+     *
      * @param departament
      * @param pageable
      * @return
      */
     public Page<Departament> findDepoByName(String departament, Pageable pageable) {
         return departamentService.findDepoByName("%" + departament + "%", pageable);
-        }
+    }
 
     /**
      * departments list from data base + pagination;
+     *
      * @param pageable
      * @return
      */
@@ -50,6 +53,7 @@ public class DepartamentServiceImpl implements DepartamentService {
 
     /**
      * department calling from list by id
+     *
      * @param id
      * @return
      */
@@ -60,6 +64,7 @@ public class DepartamentServiceImpl implements DepartamentService {
 
     /**
      * department saving method which saves depo into the data base
+     *
      * @param departament
      * @return
      */
@@ -71,6 +76,7 @@ public class DepartamentServiceImpl implements DepartamentService {
 
     /**
      * department removing from data base by id value
+     *
      * @param id
      */
     @Override
@@ -81,10 +87,20 @@ public class DepartamentServiceImpl implements DepartamentService {
 
     /**
      * get list of departments which used in EmployeeController
+     *
      * @return
      */
     @Override
     public Iterable<Departament> findListDepartment() {
         return departamentRepository.findAll();
     }
+
+
+    public boolean isDepoPresent(Long id) {
+        Departament depo = departamentRepository.findById(id).orElse(null);
+        if (depo != null)
+            return true;
+        return false;
+    }
+
 }

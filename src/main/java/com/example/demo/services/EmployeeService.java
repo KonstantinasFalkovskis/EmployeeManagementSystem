@@ -7,6 +7,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.Departament;
 import com.example.demo.entities.Employee;
+import com.example.demo.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public interface EmployeeService {
 
     //get exist employees list with pagination
     Page<Employee> findAll(Pageable pageable);
+
+    List<Employee> findByName(String name);
 
     //get employee by id
     Employee getEmployeeById(Long id);

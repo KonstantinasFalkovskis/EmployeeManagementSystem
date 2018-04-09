@@ -17,10 +17,4 @@ import java.util.List;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
 
-    /**
-     * Searching roles by role
-     * @param role
-     * @return
-     */
-    List<Role> findByRole(Role role);
 }

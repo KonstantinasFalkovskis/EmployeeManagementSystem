@@ -3,23 +3,21 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{fragments/main_layout}">
 <head>
-<title>Register Form</title>
 </head>
 <body>
-
-	<div layout:fragment="content" class="container mySpace">
+	<div layout:fragment="content">
 	<div class="alert alert-danger" th:if="${param.error}">
 	
      <h2>Invalid Email or Password</h2>	
 	</div>
 		<div class="alert alert-warning" th:if="${param.logout}">
 
-			<h2>You have been logged out</h2>
+			<h2>You have been logged out successfully</h2>
 		</div>
 		<form th:action="@{/login}"  method="post">
 
 			<div class="form-group">
-				<label for="email" class="form-control-label">Email</label> <input
+				<label for="email" class="form-control-label">Email address</label> <input
 					type="text" class="form-control"  id="email" name="username" />
 			
 			</div>
@@ -31,9 +29,12 @@
 
 			</div>
 			
-			<input type="submit" value="Submit" class="btn btn-primary" />
+			<input type="submit" value="&nbsp;Log In&nbsp;" class="btn btn-primary" />
 
 		</form>
 	</div>
+<div class="row">
+	<br>
+</div>
 </body>
 </html>

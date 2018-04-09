@@ -5,6 +5,7 @@
  */
 package com.example.demo.services;
 
+import com.example.demo.entities.Departament;
 import com.example.demo.entities.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public Page<Employee> findByName(String name, Pageable pageable) {
-        return employeeRepository.findByName("%" + name + "%", pageable);
+        return employeeRepository.findByNameLike("%"+name+"%", pageable);
     }
 
     /**
@@ -80,5 +81,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> employeeList() {
         return employeeRepository.findAll();
+    }
+
+    public boolean isEmployeePresent(Long id) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if (employee != null)
+            return true;
+        return false;
+    }
+
+    @Override
+    public List<Employee> findByName(String name) {
+        return employeeRepository.findByNameLike("%"+name+"%");
     }
 }
