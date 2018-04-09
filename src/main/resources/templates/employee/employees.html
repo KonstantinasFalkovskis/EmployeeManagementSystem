@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <head lang="en">
+        <!--<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>-->
+    </head>
+<body>
+<div layout:fragment="content">
+    <div class="alert alert-info" th:if="${exist}">
+        <p class="text text-center">
+            No results finded
+        </p>
+    </div>
+    <div align="right">
+        <form th:action="@{/employees}" method="get" class="form-inline">
+            <div class="form-group mb-2">
+                <input type="text" class="form-control" name="name" placeholder="Search Employee" />
+                <button type="submit" value="Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Search&nbsp;</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <p>
+    </div>
+    <div class="card">
+        <div class="card card-body">
+            <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Salary</th>
+                        <th>Departament</a></th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--<tr th:each="employee,iterationStatus : ${employees}">-->
+                    <tr th:each="employee:${employees}">
+                        <!--<td></td>-->
+                        <!--<td th:text="${iterationStatus.count + (page.size * (page.number-1))}">Id</td>-->
+                        <td th:text="${employee.id}">Id</td>
+                        <td th:text="${employee.name}">Name</td>
+                        <td th:text="${employee.email}">Email</td>
+                        <td th:text="${employee.salary}">Salary</td>
+                        <td th:text="${employee.departamentId.departament}">Department</td>
+                        <td>
+                        <!--<a th:href="@{/employee/view(id=${employee.id})}" class="btn btn-success" title="View employee">-->
+                            <!--<i class="glyphicon glyphicon-list"> </i> View-->
+                        <!--</a>-->
+                            <a th:href="${'/employee/view/' + employee.id}" class="btn btn-warning" title="View employee">
+                                <i class="glyphicon glyphicon-list"> </i> View
+                            </a>
+                        </td>
+                        <!--<td><a  th:href="@{/addTask(email=${user.email})}" class="btn btn-primary">Add Task</a></td>-->
+                        <td>
+                        <a th:href="${'/employee/edit/' + employee.id}" class="btn btn-warning" title="Edit employee">
+                            <i class="glyphicon glyphicon-edit"> </i> Edit
+                        </a>
+                        </td>
+                        <td>
+                        <a th:href="${'/employee/delete/' + employee.id}" class="btn btn-danger" title="Delete employee">
+                            <i class="glyphicon glyphicon-trash"> </i> Delete
+                        </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+
+        <div class="row">
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="pagination pagination-lg"><p>Showing <span class="badge badge-pill badge-primary"
+                                                                       th:text="${page.size * (page.number-1) + 1}"></span> page
+                    <span class="badge badge-pill badge-primary" th:text="${page.lastPage ? page.totalElements : page.size * (page.number-1)+ page.size}"></span> of
+                    <span class="badge badge-pill badge-primary"
+                          th:text="${page.totalElements}"></span>
+                    Employees </p></div>
+            </div>
+
+            <div class="col-sm-7">
+                <!-- Pagination Bar -->
+                <div th:fragment='paginationbar'>
+                    <div class="text-center">
+                        <ul class="pagination pagination-lg">
+                            <li th:class="${page.firstPage}?'disabled':''">
+                                <span th:if='${page.firstPage}'> « </span>
+                                <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'
+                                   title='Go to first page'> « </a>
+                            </li>
+                            <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                                <span th:if='${not page.hasPreviousPage}'> ‹ </span>
+                                <a th:if='${page.hasPreviousPage}'
+                                   th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
+                                   title='Go to previous page'> ‹ </a>
+                            </li>
+                            <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+                                <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                                <a th:if='${not item.current}'
+                                   th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
+                                        th:text='${item.number}'>1</span></a>
+                            </li>
+                            <li th:class="${page.hasNextPage}? '' : 'disabled'">
+                                <span th:if='${not page.hasNextPage}'> › </span>
+                                <a th:if='${page.hasNextPage}'
+                                   th:href='@{${page.url}(page=${page.number},size=${page.size})}'
+                                   title='Go to next page'> › </a>
+                            </li>
+                            <li th:class="${page.lastPage}? 'disabled' : ''">
+                                <span th:if='${page.lastPage}'> » </span>
+                                <a th:if='${not page.lastPage}'
+                                   th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'title='Go to last page'> » </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
