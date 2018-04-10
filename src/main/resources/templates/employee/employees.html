@@ -13,6 +13,7 @@
             No results finded
         </p>
     </div>
+
     <div align="right">
         <form th:action="@{/employees}" method="get" class="form-inline">
             <div class="form-group mb-2">
@@ -24,8 +25,8 @@
     <div class="row">
         <p>
     </div>
-    <div class="card">
-        <div class="card card-body">
+        <div class="card">
+            <div class="card card-body">
             <table class="table table-hover">
                     <thead>
                     <tr>
@@ -40,26 +41,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!--<tr th:each="employee,iterationStatus : ${employees}">-->
-                    <tr th:each="employee:${employees}">
-                        <!--<td></td>-->
-                        <!--<td th:text="${iterationStatus.count + (page.size * (page.number-1))}">Id</td>-->
-                        <td th:text="${employee.id}">Id</td>
-                        <td th:text="${employee.name}">Name</td>
-                        <td th:text="${employee.email}">Email</td>
-                        <td th:text="${employee.salary}">Salary</td>
-                        <td th:text="${employee.departamentId.departament}">Department</td>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.id}"></td>
+                        <td th:text="${employee.name}"></td>
+                        <td th:text="${employee.email}"></td>
+                        <td th:text="${employee.salary}"></td>
+                        <td th:text="${employee.departamentId.departament}"></td>
+                        <!--<td>-->
+                            <!--<a th:href="@{employeeView(id=${employee.id})}" class="btn btn-success" title="View employee">-->
+                                <!--<i class="glyphicon glyphicon-list"> </i> View-->
+                            <!--</a>-->
+                        <!--</td>-->
                         <td>
-                        <!--<a th:href="@{/employee/view(id=${employee.id})}" class="btn btn-success" title="View employee">-->
-                            <!--<i class="glyphicon glyphicon-list"> </i> View-->
-                        <!--</a>-->
-                            <a th:href="${'/employee/view/' + employee.id}" class="btn btn-warning" title="View employee">
+                            <a th:href="${'employeeView/' + employee.id}" class="btn btn-success" title="View employee">
                                 <i class="glyphicon glyphicon-list"> </i> View
                             </a>
                         </td>
-                        <!--<td><a  th:href="@{/addTask(email=${user.email})}" class="btn btn-primary">Add Task</a></td>-->
                         <td>
-                        <a th:href="${'/employee/edit/' + employee.id}" class="btn btn-warning" title="Edit employee">
+                        <a th:href="${'employeeForm/' + employee.id}" class="btn btn-warning" title="Edit employee">
                             <i class="glyphicon glyphicon-edit"> </i> Edit
                         </a>
                         </td>
@@ -72,8 +71,7 @@
                     </tbody>
                 </table>
               </div>
-            </div>
-
+        </div>
         <div class="row">
             <br>
         </div>
@@ -125,6 +123,8 @@
                 </div>
             </div>
         </div>
+
     </div>
+
 </body>
 </html>

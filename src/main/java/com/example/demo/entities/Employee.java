@@ -17,13 +17,13 @@ import java.io.Serializable;
  * Employee entity
  */
 @Entity
-@Table(name = "employee")
-@XmlRootElement
-@NamedQueries({@NamedQuery(name = "Employee.findAll", query = "SELECT a FROM Employee a")
-        , @NamedQuery(name = "Employee.findBySalary", query = "SELECT a FROM Employee a WHERE a.salary = :salary")
-        , @NamedQuery(name = "Employee.findByName", query = "SELECT a FROM Employee a WHERE a.name = :name")
-        , @NamedQuery(name = "Employee.findById", query = "SELECT a FROM Employee a WHERE a.id = :id")})
-public class Employee implements Serializable{
+//@Table(name = "employee")
+//@XmlRootElement
+//@NamedQueries({@NamedQuery(name = "Employee.findAll", query = "SELECT a FROM Employee a")
+//        , @NamedQuery(name = "Employee.findBySalary", query = "SELECT a FROM Employee a WHERE a.salary = :salary")
+//        , @NamedQuery(name = "Employee.findByName", query = "SELECT a FROM Employee a WHERE a.name = :name")
+//        , @NamedQuery(name = "Employee.findById", query = "SELECT a FROM Employee a WHERE a.id = :id")})
+public class Employee {
 
     //autoincrement value id
     @Id
@@ -125,41 +125,41 @@ public class Employee implements Serializable{
         this.departamentId = departamentId;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Employee)) {
-            return false;
-        }
-        Employee other = (Employee) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
 //    @Override
-//    public String toString() {
-//        return "Employee{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", salary='" + salary + '\'' +
-//                ", email='" + email + '\'' +
-//                ", departamentId=" + departamentId +
-//                '}';
+//    public int hashCode() {
+//        int hash = 0;
+//        hash += (id != null ? id.hashCode() : 0);
+//        return hash;
+//    }
+//
+//    @Override
+//    public boolean equals(Object object) {
+//        // TODO: Warning - this method won't work in the case the id fields are not set
+//        if (!(object instanceof Employee)) {
+//            return false;
+//        }
+//        Employee other = (Employee) object;
+//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+//            return false;
+//        }
+//        return true;
 //    }
 
     @Override
     public String toString() {
         return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary='" + salary + '\'' +
+                ", email='" + email + '\'' +
                 ", departamentId=" + departamentId +
                 '}';
     }
+
+//    @Override
+//    public String toString() {
+//        return "Employee{" +
+//                ", departamentId=" + departamentId +
+//                '}';
+//    }
 }
