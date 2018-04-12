@@ -11,20 +11,34 @@ $(document).ready(function(){
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
+
+
+        // if (text == 'View') {
+        //     $.get(href, function (employee, status) {
+        //         $('.myFormView #id').val(employee.id);
+        //         $('.myFormView #name').val(employee.name);
+        //         $('.myFormView #email').val(employee.email);
+        //         $('.myFormView #salary').val(employee.salary);
+        //         $('.myFormView #departamentId').val(employee.departamentId);
+        //     });
+        //      $('.myFormView #viewModal').modal();
+        // }
         //for update user
         if (text == 'Edit') {
-            $.get(href, function (users, status) {
-                $('.myFormUpdate #id').val(users.id);
-                $('.myFormUpdate #username').val(users.username);
-                $('.myFormUpdate #password').val(users.password);
-                $('.myFormUpdate #email').val(users.email);
+            $.get(href, function (employee, status) {
+                $('.myFormUpdate #id').val(employee.id);
+                $('.myFormUpdate #name').val(employee.name);
+                $('.myFormUpdate #email').val(employee.email);
+                $('.myFormUpdate #salary').val(employee.salary);
+                $('.myFormUpdate #departamentId').val(employee.departamentId);
             });
             $('.myFormUpdate #updateModal').modal();
         } else {
             //for creating user
-            $('.myFormCreate #username').val('');
-            $('.myFormCreate #password').val('');
+            $('.myFormCreate #name').val('');
             $('.myFormCreate #email').val('');
+            $('.myFormCreate #salary').val('');
+            $('.myFormCreate #departamentId').val('');
             $('.myFormCreate #myModalCreate').modal();
         }
     });
